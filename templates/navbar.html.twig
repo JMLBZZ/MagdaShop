@@ -1,0 +1,124 @@
+<nav class="navbar navbar-expand-md navbar-dark sticky-top bg-black">
+    <div class="container-fluid justify-content-center">
+        <a class="navbar-brand mb-0" href="{{ path('app_home') }}">
+            <img src="{{ asset('assets/img/logo-magdashop.svg') }}" alt="Logo Magdalena-Paris Boutique" width="150" height="auto">
+            
+        </a>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-md navbar-dark sticky-top bg-black">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0 ">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{ path('app_home') }}">
+                        Accueil
+                    </a>
+                </li>
+                {% for category in allCategories %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path("app_category",{ slug : category.slug}) }}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul class="navbar-nav justify-content-end ">
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_account') }}">
+                            {# <i data-feather="user"></i> #}
+                            <i class="bi bi-person-circle">
+                                {{ app.user.lastname }}
+                            </i>
+                        {# affiche le nom de l'utilisateur #}
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_account_addresses') }}">
+                                    <i class="bi bi-houses me-3"></i>
+                                    Mes adresses
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_account') }}">
+                                    <i class="bi bi-bag-check me-3"></i>
+                                    Mes commandes
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_account_wishlist') }}">
+                                    <i class="bi bi-heart me-3"></i>
+                                    Mes favoris
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_account_updatepwd') }}">
+                                    <i class="bi bi-arrow-repeat me-3"></i>
+                                    Modifier mon mot de passe
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            {% if is_granted ("ROLE_ADMIN") %}
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('admin') }}">
+                                        <i class="bi bi-person-gear me-3"></i>
+                                        Espace administrateur
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">
+                                    <i class="bi bi-x-circle me-3">
+                                        Déconnexion
+                                    </i>
+
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">
+                            <i data-feather="user"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {# <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <i class="bi bi-basket"></i>
+                    </a>
+                </li> #}
+                <li class="nav-item">
+                    <a class="btn" href="{{ path('app_basket') }}">
+                        <i class="bi bi-basket"></i>
+                        <span class="badge rounded-pill bg-danger">
+                            {{ totalBasketQty }}
+                            <span class="visually-hidden">
+                                unread messages
+                            </span>
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

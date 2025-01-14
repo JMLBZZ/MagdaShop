@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/uploads/{{ product.image }}" class="img-fluid" alt="{{ product.slug }}"></div>
+                <div class="col-md-6">
+                    <small>{# fil d'ariane #}
+                        <i>
+                            <a href="{{ path("app_category",{ slug : product.category.slug}) }}">{{ product.category.name }}</a>
+                            /   
+                            <a href="">{{ product.name }}</a> 
+                        </i>
+                    </small>
+                    <h1>{{ product.name }}</h1>
+                    <span class="d-block mb-3">{{ product.PriceTva | pricefilter }}</span>
+                    {{ product.description | raw }}
+                    <div class="d-flex align-items-center justify-content-between mt-3">
+                        <a href="{{ path("app_basket_add", { id : product.id }) }}" type="button" class="btn btn-dark w-100">Ajouter au panier</a>
+                        
+                        {# BOUTON FAVORIS #}
+                        {% if app.user %}
+                            {% if product in app.user.wishlists %}
+                                <a href="{{ path("app_account_wishlist_remove", {id : product.id})}}" class="fav-icon-active ms-3">
+                                    <i data-feather="heart"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ path("app_account_wishlist_add", {id : product.id})}}" class="fav-icon ms-3">
+                                    <i data-feather="heart"></i>
+                                </a>
+                            {% endif %}
+
+                        {% else %}
+                            <a href="#collapseExample" class="ms-3" data-bs-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <i data-feather="heart"></i>
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                    {# Collapse Heart favori #}
+                    <div class="collapse mt-3" id="collapseExample">
+                        <div class="">
+                            Pour enregistrer en favoris, veuillez vous <a href="{{ path("app_login")}}">connecter</a> ou vous <a href="{{ path("app_register")}}">inscrire</a>.
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        {# {{ dump(product) }} #}
+        </div>
+    {% endblock %}
+    

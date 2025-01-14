@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container my-5">
+
+        {% if status_code == 404 %}
+            <div class="row">
+                <div class="col-md-6 align-self-center">
+                    <img class="img-fluid error" src="{{ asset('assets/img/error/404.jpg') }}" alt="Error 404 - Page not found">
+                </div>
+                <div class="col-md-6 align-self-center text-center">
+                    <h1 class="error">HOLY CAP!</h1>
+                    <h1 class="error my-5">{{ status_code }}</h1>
+                    <h2 class="error">Vous êtes perdu.</h2>
+                    <p>
+                        La page que vous recherchez n'existe pas. <br/>La façon dont vous êtes arrivé ici est un mystère. <br/>Mais vous pouvez cliquer sur le bouton ci-dessous pour revenir à la page d'accueil.
+                    </p>
+                    
+                    <a href="{{ path('app_home') }}">
+                        <button class="btn btn-dark error">Accueil</button>
+                    </a>
+                </div>
+            </div>
+            {% elseif status_code == 403 %}
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <img class="img-fluid error" src="{{ asset('assets/img/error/403.jpg') }}" alt="Error 403 - Access Denied">
+                    </div>
+                    <div class="col-md-6 align-self-center text-center">
+                        <h1 class="error">HOLY CAP!</h1>
+                        <h1 class="error my-5">{{ status_code }}</h1>
+                        <h2 class="error">Accès non authorisé.</h2>
+                        <p class="my-5">
+                            Désolé, vous n'avez pas l'autorisation d'accéder à cette page.<br/>Veuillez vérifier vos identifiants ou contacter l'administrateur du site si vous pensez qu'il s'agit d'une erreur.
+                        </p>
+                        
+                        <a href="{{ path('app_home') }}">
+                            <button class="btn btn-dark error">Accueil</button>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <img class="img-fluid" src="{{ asset('assets/img/error/404.jpg') }}" alt="Error">
+                    </div>
+                    <div class="col-md-6 align-self-center text-center">
+                        <h1 class="error">HOLY CAP!</h1>
+                        <h1 class="error my-5">{{ status_code }}</h1>
+                        <h2 class="error">Une erreur est survenue.</h2>
+                        <p>
+                            Oups ! Quelque chose s'est mal passé.<br/>
+                            Veuillez réessayer plus tard ou contacter l'administrateur du site.
+                        </p>
+                        
+                        <a href="{{ path('app_home') }}">
+                            <button class="btn btn-dark error">Accueil</button>
+                        </a>
+                    </div>
+                </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

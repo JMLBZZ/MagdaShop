@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container my-5">
+
+        <h1 class="mb-5">{{ category.name }}</h1>
+
+        <p>Il y a {{ category.products|length }} {{ category.name }}.</p>
+
+        <div class="card-group">
+            {% for product in category.products %}
+                <div class="card">
+                    <div class="text-end mx-3 mt-2">
+                        {% if app.user %}
+                            {% if product in app.user.wishlists %}
+                                <a href="{{ path("app_account_wishlist_remove", {id : product.id})}}" class="fav-icon-active ms-3">
+                                    <i data-feather="heart"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ path("app_account_wishlist_add", {id : product.id})}}" class="fav-icon ms-3">
+                                    <i data-feather="heart"></i>
+                                </a>
+                            {% endif %}
+
+                        {% else %}
+                            <a href="#collapseExample" class="ms-3" data-bs-toggle="collapse"  role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <i data-feather="heart"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <img src="/uploads/{{ product.image }}" class="img-fluid card-img-top p-5" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            {# RÉGLER LE PROBLÈME DU FILTRE TWIG VIA LA CRÉATION D'UNE EXTENSION TWIG #}
+                            <p class="card-text">{{ product.description |u.truncate(80, "...") |raw }}</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-body-secondary">{{ product.PriceTva | pricefilter }}</small>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <a href="{{ path("app_basket_add", { id : product.id }) }}" type="button" class="btn btn-dark">
+                                <i class="bi bi-bag-plus"></i>
+                            </a>
+                            <a href="{{ path("app_product",{ slug : product.slug}) }}" class="btn btn-dark">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    {% endblock %}
+    
