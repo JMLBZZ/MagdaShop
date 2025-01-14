@@ -98,7 +98,7 @@ class PaymentController extends AbstractController
                 "firstname" => $user->getFirstname(),
                 "lastname" => $user->getLastname(),
             ];
-            $mail->send("magdaShop@yopmail.com", $user->getLastname()." ".$user->getFirstname(), "Bienvenue sur MagdaShop", "welcome.html", $vars);
+            $mail->send("magdaShop@yopmail.com", $user->getLastname()." ".$user->getFirstname(), "Bienvenue sur Magdalena Boutique", "welcome.html", $vars);
         // ############################ fin de mail ############################ //
 
         $order = $orderRepository->findOneBy([

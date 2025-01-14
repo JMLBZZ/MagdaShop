@@ -38,7 +38,7 @@ class RegisterController extends AbstractController
                 "firstname" => $user->getFirstname(),
                 "lastname" => $user->getLastname(),
             ];
-            $mail->send($user->getEmail(), $user->getLastname()." ".$user->getFirstname(), "Bienvenue sur MagdaShop", "welcome.html", $vars);
+            $mail->send($user->getEmail(), $user->getLastname()." ".$user->getFirstname(), "Bienvenue sur Magdalena Boutique", "welcome.html", $vars);
         // ############################ fin de mail ############################ //
 
             // ... tu rediriges sur la page de login

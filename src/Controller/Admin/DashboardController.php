@@ -45,13 +45,17 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             //->setTitle('MagdaShop - DashBoard');
-            ->setTitle('<img src="/assets/img/logo-magdashop.svg" alt="MagdaShop" style="height: 25px;">Dashboard');
+            ->setTitle('
+                <img src="/assets/img/logo-magdashop.svg" alt="Magdalena Boutique logo" class="container-fluid justify-content-center" style="height: 25px;">
+                <p class="skia d-flex justify-content-center mt-1 text-uppercase" style="font-size: smaller;" >Administration</p>')
+            //->disableDarkMode()//désactive mode sombre
+            ;
 
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        //yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
@@ -59,6 +63,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Transporteurs', 'fas fa-truck', Carrier::class);
         yield MenuItem::linkToCrud('Commandes', 'fas fa-box', Order::class);
         yield MenuItem::linkToCrud('Bannière', 'fas fa-images', Header::class);
-        yield MenuItem::linkToRoute('Site - MagdaShop', 'fas fa-circle-left', 'app_home');
+        yield MenuItem::linkToRoute('Site - Magdalena Boutique', 'fas fa-circle-left', 'app_home')->setLinkTarget('_blank');// avec option d'ouverture nouvel onglet
     }
 }

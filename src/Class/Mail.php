@@ -26,7 +26,7 @@ class Mail
                 [
                     'From' => [
                         'Email' => "jamel.bouazza@hotmail.fr",
-                        'Name' => "MagdaShop"
+                        'Name' => "Magdalena Boutique"
                     ],
                     'To' => [
                         [
